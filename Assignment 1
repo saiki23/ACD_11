@@ -1,0 +1,27 @@
+banking_data<-read.csv(file.choose(),sep = ";",stringsAsFactors = FALSE)
+View(banking_data)
+library(VIM)
+library(mice)
+library(dplyr)
+library("tibble")
+
+#1
+md.pattern(banking_data)
+aggr(banking_data,prop=F,numbers=T)
+
+#2
+count<-table(banking_data$job)
+barplot(count,main="job type",xlab="Job")
+
+#3
+library("gclus")
+banking_data$job.factor<-factor(banking_data$job)
+banking_data$marital.factor<-factor(banking_data$marital)
+cor(as.numeric(banking_data$marital.factor),as.numeric(banking_data$job.factor))
+# weak positive correleation
+
+#4
+banking_data$job.factor<-factor(banking_data$job)
+banking_data$education.factor<-factor(banking_data$education)
+cor(as.numeric(banking_data$education.factor),as.numeric(banking_data$job.factor))
+#weak positive correleation
